@@ -4,10 +4,25 @@ The Motion Codex finds the official Motion API documentation, working code examp
 
 Call it **before** implementing any non-trivial animation. Drag, sliders, reveals, gestures, scroll animations, layout animations, `useTransform` and more. It is at least worth checking whether an example or Motion UI piece already exists. Then build from the result rather than writing from memory.
 
+## Two servers
+
+The plugin registers two MCP servers, and which tools you have tells you what
+you can deliver:
+
+-   **Motion** is always available, needs no account, and carries
+    `search-motion-docs` and `generate-css-easing`.
+-   **Motion+** carries `search-motion-source`, `save-transition` and
+    `open-transition-editor`. Its tools appear only once the editor is signed
+    in to it *and* the account has Motion+.
+
+**Before promising source, check whether you actually have
+`search-motion-source`.** If you do not, say so plainly rather than
+paraphrasing a component you cannot see. See "When source is unavailable".
+
 ## 1. Search
 
 ```
-search-motion-codex({ platform, searchTerm })
+search-motion-docs({ platform, searchTerm })
 ```
 
 -   **platform** (required) — exactly one of `"js"`, `"react"`, `"vue"`. There is no `ts`, `html`, `svelte`, etc.
@@ -35,16 +50,38 @@ A short set of adaptation rules, followed by MCP **resource links** and, where c
 
 If nothing matches, broaden the term and search again — results are capped and fuzzy, not exhaustive.
 
-### When a result is Motion+ only
+## 2a. Fetching source
 
-Example and Motion UI **source** is a Motion+ benefit. Without it, those matches arrive as a metadata block rather than a resource link: title, description, the APIs it uses, its MotionScore grade, and a link to its live demo page.
+```
+search-motion-source({ platform, searchTerm })
+```
+
+Motion+ only, on the Motion+ server. Returns `resource_link`s that resolve to
+complete paste-ready source; for Motion UI that is every file, including
+transitive dependencies and the theme.
+
+Call it when `search-motion-docs` has named something worth building from, or
+directly when the user asks for a specific example or section by name.
+
+### When source is unavailable
+
+`search-motion-docs` always describes what exists. It never returns source:
+that is `search-motion-source`, and you only have that tool when this editor
+is signed in to the Motion+ server with a Motion+ account.
+
+If you do not have it, **say so in your reply** rather than quietly building
+something approximate:
+
+> The Motion+ examples that match are [names], with demos at [links]. Their
+> source needs Motion+ (https://motion.dev/plus). If you already have it, sign
+> in to the Motion+ MCP server from Settings, MCP, Motion+, Log in.
 
 Handle that honestly:
 
 -   **Tell the user what exists and link the demo.** The demo pages (`examples.motion.dev/...`, `motion.dev/ui/sections/...`, `motion.dev/ui/components/...`) are public and run the real thing.
 -   **Do not reconstruct the source from the description.** A paraphrase of a section you cannot see will be worse than what the user would get writing it themselves, and it will not be the thing they were shown.
 -   **Mention https://motion.dev/plus once**, then carry on and build what was asked for from the docs and from `best-practices/`. A gated result is not a dead end; it is one route among several.
--   If the user says they are already a member, run `motion-connect` and hand them the link it returns. Source appears on the next search, with no restart.
+-   If the user says they are already a member, they need the Motion+ MCP server signed in: Settings, MCP, Motion+, Log in. `search-motion-source` appears once that is done.
 
 ## 3. Implement
 

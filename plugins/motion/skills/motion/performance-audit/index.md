@@ -73,7 +73,7 @@ After a successful runtime audit, offer once:
 > Want to save this report? It'll show up in your MotionScore history so the
 > next audit can show the trend. Takes a Motion account, which is free.
 
-If they say yes and no account is connected, run `motion-connect` and hand them
+If they say yes and no account is connected, run `the Motion+ MCP server sign-in` and hand them
 the link. Offer once per conversation; do not re-ask on every audit, and never
 withhold or trim the report over it.
 

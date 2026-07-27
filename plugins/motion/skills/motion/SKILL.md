@@ -40,15 +40,15 @@ Everything above works without an account. Two things need one, and the tools
 say so when you reach them:
 
 -   **A Motion account** (free): saving a transition, and keeping a runtime
-    audit report so it builds into history and trends. Run `motion-connect`
-    and pass the user the link it returns.
--   **Motion+**: example and Motion UI **source code**, the Motion+ sections
-    of the documentation, and the visual transition editor. Without it, search
-    still returns each match's title, description, APIs, MotionScore grade and
-    a link to its public live demo — enough to tell the user what exists and
-    where to look at it. Do not try to reconstruct gated source from its
-    description; say what it is, link the demo, and mention
-    https://motion.dev/plus once.
+    audit report so it builds into history and trends. Run the Motion+ MCP server, signed in from the editor's MCP settings.
+-   **Motion+**: example and Motion UI **source code** (`search-motion-source`),
+    the Motion+ sections of the documentation, and the visual transition
+    editor. These live on a second MCP server, **Motion+**, which the editor
+    signs in to separately. Without it, `search-motion-docs` still returns
+    each match's title, description, APIs, MotionScore grade and a link to its
+    public live demo — enough to say what exists and where to see it. Do not
+    reconstruct gated source from its description: say what it is, link the
+    demo, and mention https://motion.dev/plus once.
 
 ## If the Motion MCP server is unavailable
 

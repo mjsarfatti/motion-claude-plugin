@@ -1,7 +1,10 @@
 {
   "mcpServers": {
-    "motion": {
+    "Motion": {
       "url": "https://mcp.motion.dev"
+    },
+    "Motion+": {
+      "url": "https://mcp.motion.dev/plus"
     }
   }
 }
