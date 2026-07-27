@@ -1,88 +1,106 @@
+<p align="center">
+  <img src="plugins/motion/assets/cursor-plugin-card.png" alt="Motion for Cursor" width="100%">
+</p>
+
 # Motion for Cursor
 
-The official Cursor plugin for [Motion](https://motion.dev), the animation
-library for the web. Free, and zero-config: install it and Cursor gets better
-at animation immediately.
+Cursor is good at most code. It is not good at animation. It reaches for
+`framer-motion` two package names ago, animates `width` when it means `scale`,
+and picks spring numbers that feel like nothing in particular.
 
-## What it does
+This plugin fixes that. It is free, it installs in one click, and there is
+nothing to configure.
 
-- **Best practices** for Motion and plain CSS, with platform-specific guidance
-  for vanilla JS, React, Vue, Base UI and Radix. Covers the things that are
-  easy to get subtly wrong: when to use `transform` versus independent
-  transforms, where `will-change` helps and where it hurts, how to pick a
-  spring that suits the product.
-- **Documentation and example search** over the whole Motion codex, delivered
-  as MCP resources so full pages cost nothing until they are read.
-- **CSS spring and bounce generation** as `linear()` easing curves.
-- **The MotionScore performance audit**, which grades every animation in a file
-  or a project S through F by its render-pipeline cost, and tells you which
-  ones have a real upgrade path. A runtime audit runs locally against any URL
-  via `npx motionscore`.
-- **Upgrade guidance** between Motion versions, and from `framer-motion` or
-  GSAP.
+## What you get
 
-Type `/motion` to invoke it directly, or just animate something — a scoped rule
-fires the skill on animation work in any JS, TS, Vue, Svelte, Astro or CSS file.
+**Animations that don't jank.** Cursor learns which properties the browser can
+animate on the compositor and which force a layout on every frame. It stops
+reaching for `top` and `left`, and it knows when `will-change` helps and when
+it is just burning memory.
 
-## Tiers
+**The real API, not a guess.** Every Motion doc, example and UI section is
+searchable from inside the editor, so Cursor builds a carousel from the
+official pattern instead of improvising one that half works. It searches before
+it writes, not after you've read the diff.
 
-Everything above works with no account and no configuration.
-
-| | Free | Motion account | [Motion+](https://motion.dev/plus) |
-|---|:--:|:--:|:--:|
-| Documentation search and full pages | ✅ | ✅ | ✅ |
-| Best practices, upgrade guides | ✅ | ✅ | ✅ |
-| MotionScore code audit | ✅ | ✅ | ✅ |
-| MotionScore runtime audit (`npx motionscore`) | ✅ | ✅ | ✅ |
-| CSS spring and bounce generation | ✅ | ✅ | ✅ |
-| Example and Motion UI metadata, grades and live demos | ✅ | ✅ | ✅ |
-| Saving a runtime audit report (history, trends) | — | ✅ | ✅ |
-| Saved transitions | — | ✅ | ✅ |
-| Example source code | — | — | ✅ |
-| Motion UI source (multi-file) | — | — | ✅ |
-| Motion+ documentation | — | — | ✅ |
-| Visual transition editor | — | — | ✅ |
-
-To connect an account, ask the agent to sign you in: it calls `motion-connect`
-and gives you a link. Nothing is ever pasted into chat.
-
-In CI, or in a client that does not keep a session, set `MOTION_TOKEN` in the
-environment instead — the MCP config already reads it. Generate one at
-[motion.dev/dashboard/tokens](https://motion.dev/dashboard/tokens).
-
-## Repository layout
+**A performance audit, on demand.** Ask it to audit a file, a folder or the
+whole project and you get every animation graded S to F by what it actually
+costs the browser, with the specific line, the reason, and a fix. Point it at a
+running URL and it opens a real browser to measure the page for you:
 
 ```
-.cursor-plugin/marketplace.json   marketplace manifest
+> audit src/components for animation performance
+```
+
+```
+Rank: B     S ████████████████░░░░░░░  9 · 45%
+            A █████████░░░░░░░░░░░░░░  5 · 25%
+            C ██████░░░░░░░░░░░░░░░░░  4 · 20%
+            D ██░░░░░░░░░░░░░░░░░░░░░  2 · 10%
+
+src/Sheet.tsx:34 — Tier D
+What:     `height` transition on `.sheet-panel`
+Why:      height triggers layout, then paint, then composite, every frame
+Upgrade:  Motion's `layout` prop (B) or a `scaleY` transform (S)
+```
+
+**CSS springs, without the calculator.** Ask for a spring that lasts 0.3
+seconds and is quite bouncy, and get a `linear()` curve you can paste into a
+stylesheet. Same for bounce easings, which is the one people always write by
+hand and always get slightly wrong.
+
+**No more `framer-motion`.** A scoped rule catches the import in any file you
+touch and offers to migrate it, and the upgrade guides walk the versions in
+order rather than dumping a summary that silently reorders the steps.
+
+## Install
+
+Find **Motion** in the Cursor Marketplace and install it. That's the whole
+setup.
+
+Type `/motion` to talk to it directly, or just animate something and it will
+show up on its own.
+
+## Motion+
+
+Everything above is free and always will be. Two things sit behind an account,
+and Cursor tells you when you reach them.
+
+**A free Motion account** keeps a runtime audit report so it builds into
+history, and remembers transitions you've tuned so they get offered again on
+your next project.
+
+**[Motion+](https://motion.dev/plus)** adds paste-ready source for every
+example and Motion UI section, the Motion+ documentation, and a visual editor
+for tuning a transition against a live preview instead of guessing at numbers.
+Without it you still see what exists, what it uses, how it scores and a link to
+the live demo, so you always know what's there.
+
+Ask Cursor to sign you in and it hands you a link. Nothing gets pasted into
+chat.
+
+## What's in here
+
+```
 plugins/motion/
-  .cursor-plugin/plugin.json      plugin manifest
-  rules/motion.mdc                glob-scoped pointer at the skill
-  skills/motion/                  the skill and its capability directories
-  agents/motion-reviewer.md       audit subagent for directory-wide scans
-  mcp.json                        remote MCP server (mcp.motion.dev)
-  assets/logo.svg
+  rules/            fires the skill on animation work, blocks framer-motion
+  skills/motion/    best practices, docs search, CSS easing, the audit
+  agents/           the audit subagent, for scans bigger than one file
+  mcp.json          the Motion MCP server
 ```
 
-The MCP server is remote, so there is nothing to install, nothing to keep
-updated, and no corpus on disk. Entitlement resolves per request, so buying
-Motion+ takes effect on the next call rather than on the next restart.
-
-## Development
-
-```bash
-node scripts/validate-template.mjs
-```
-
-Run before every submission. To test locally, install the plugin from this
-directory in Cursor and confirm `/motion` fires, the rule triggers on a `.tsx`
-file without the skill being named, and the MCP server connects anonymously.
-
-To add another plugin, see `docs/add-a-plugin.md`.
+The MCP server is remote, so there's no package to install and nothing to keep
+up to date. New examples and docs appear the day they ship.
 
 ## Links
 
-- [Motion](https://motion.dev)
+- [motion.dev](https://motion.dev)
 - [Documentation](https://motion.dev/docs)
 - [Examples](https://examples.motion.dev)
 - [Motion UI](https://motion.dev/ui)
 - [MotionScore](https://motion.dev/docs/motionscore)
+
+---
+
+Adding another plugin to this repo: see `docs/add-a-plugin.md`. Run
+`node scripts/validate-template.mjs` before submitting.
