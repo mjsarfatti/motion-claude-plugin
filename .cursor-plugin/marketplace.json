@@ -1,23 +1,18 @@
 {
-  "name": "cursor-plugin-starters",
+  "name": "motion",
   "owner": {
-    "name": "Your Org",
-    "email": "plugins@example.com"
+    "name": "Motion",
+    "email": "matt@motion.dev"
   },
   "metadata": {
-    "description": "Starter marketplace template for Cursor plugins",
-    "version": "0.1.0"
+    "description": "Official Cursor plugins from Motion, the animation library for the web.",
+    "version": "1.0.0"
   },
   "plugins": [
     {
-      "name": "starter-simple",
-      "source": "./plugins/starter-simple",
-      "description": "Minimal plugin with rules and skills only"
-    },
-    {
-      "name": "starter-advanced",
-      "source": "./plugins/starter-advanced",
-      "description": "Full-featured plugin with rules, skills, agents, commands, hooks, and MCP"
+      "name": "motion",
+      "source": "./plugins/motion",
+      "description": "Make Cursor good at animation: Motion and CSS best practices, documentation and example search, CSS spring generation, and the MotionScore performance audit."
     }
   ]
 }

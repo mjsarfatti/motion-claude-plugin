@@ -1,34 +1,88 @@
-# Cursor plugin template
+# Motion for Cursor
 
-Build and publish Cursor Marketplace plugins from a single repo.
+The official Cursor plugin for [Motion](https://motion.dev), the animation
+library for the web. Free, and zero-config: install it and Cursor gets better
+at animation immediately.
 
-Two starter plugins are included:
+## What it does
 
-- **starter-simple**: rules and skills only
-- **starter-advanced**: rules, skills, agents, commands, hooks, MCP, and scripts
+- **Best practices** for Motion and plain CSS, with platform-specific guidance
+  for vanilla JS, React, Vue, Base UI and Radix. Covers the things that are
+  easy to get subtly wrong: when to use `transform` versus independent
+  transforms, where `will-change` helps and where it hurts, how to pick a
+  spring that suits the product.
+- **Documentation and example search** over the whole Motion codex, delivered
+  as MCP resources so full pages cost nothing until they are read.
+- **CSS spring and bounce generation** as `linear()` easing curves.
+- **The MotionScore performance audit**, which grades every animation in a file
+  or a project S through F by its render-pipeline cost, and tells you which
+  ones have a real upgrade path. A runtime audit runs locally against any URL
+  via `npx motionscore`.
+- **Upgrade guidance** between Motion versions, and from `framer-motion` or
+  GSAP.
 
-## Getting started
+Type `/motion` to invoke it directly, or just animate something — a scoped rule
+fires the skill on animation work in any JS, TS, Vue, Svelte, Astro or CSS file.
 
-[Use this template](https://github.com/cursor/plugin-template/generate) to create a new repository, then customize:
+## Tiers
 
-1. `.cursor-plugin/marketplace.json`: set marketplace `name`, `owner`, and `metadata`.
-2. `plugins/*/.cursor-plugin/plugin.json`: set `name` (lowercase kebab-case), `displayName`, `author`, `description`, `keywords`, `license`, and `version`.
-3. Replace placeholder rules, skills, agents, commands, hooks, scripts, and logos.
+Everything above works with no account and no configuration.
 
-To add more plugins, see `docs/add-a-plugin.md`.
+| | Free | Motion account | [Motion+](https://motion.dev/plus) |
+|---|:--:|:--:|:--:|
+| Documentation search and full pages | ✅ | ✅ | ✅ |
+| Best practices, upgrade guides | ✅ | ✅ | ✅ |
+| MotionScore code audit | ✅ | ✅ | ✅ |
+| MotionScore runtime audit (`npx motionscore`) | ✅ | ✅ | ✅ |
+| CSS spring and bounce generation | ✅ | ✅ | ✅ |
+| Example and Motion UI metadata, grades and live demos | ✅ | ✅ | ✅ |
+| Saving a runtime audit report (history, trends) | — | ✅ | ✅ |
+| Saved transitions | — | ✅ | ✅ |
+| Example source code | — | — | ✅ |
+| Motion UI source (multi-file) | — | — | ✅ |
+| Motion+ documentation | — | — | ✅ |
+| Visual transition editor | — | — | ✅ |
 
-## Single plugin vs multi-plugin
+To connect an account, ask the agent to sign you in: it calls `motion-connect`
+and gives you a link. Nothing is ever pasted into chat.
 
-This template defaults to **multi-plugin** (multiple plugins in one repo).
+In CI, or in a client that does not keep a session, set `MOTION_TOKEN` in the
+environment instead — the MCP config already reads it. Generate one at
+[motion.dev/dashboard/tokens](https://motion.dev/dashboard/tokens).
 
-For a **single plugin**, move your plugin folder contents to the repository root, keep one `.cursor-plugin/plugin.json`, and remove `.cursor-plugin/marketplace.json`.
+## Repository layout
 
-## Submission checklist
+```
+.cursor-plugin/marketplace.json   marketplace manifest
+plugins/motion/
+  .cursor-plugin/plugin.json      plugin manifest
+  rules/motion.mdc                glob-scoped pointer at the skill
+  skills/motion/                  the skill and its capability directories
+  agents/motion-reviewer.md       audit subagent for directory-wide scans
+  mcp.json                        remote MCP server (mcp.motion.dev)
+  assets/logo.svg
+```
 
-- Each plugin has a valid `.cursor-plugin/plugin.json`.
-- Plugin names are unique, lowercase, and kebab-case.
-- `.cursor-plugin/marketplace.json` entries map to real plugin folders.
-- All frontmatter metadata is present in rule, skill, agent, and command files.
-- Logos are committed and referenced with relative paths.
-- `node scripts/validate-template.mjs` passes.
-- Repository link is ready for submission to the Cursor team (Slack or `kniparko@anysphere.com`).
+The MCP server is remote, so there is nothing to install, nothing to keep
+updated, and no corpus on disk. Entitlement resolves per request, so buying
+Motion+ takes effect on the next call rather than on the next restart.
+
+## Development
+
+```bash
+node scripts/validate-template.mjs
+```
+
+Run before every submission. To test locally, install the plugin from this
+directory in Cursor and confirm `/motion` fires, the rule triggers on a `.tsx`
+file without the skill being named, and the MCP server connects anonymously.
+
+To add another plugin, see `docs/add-a-plugin.md`.
+
+## Links
+
+- [Motion](https://motion.dev)
+- [Documentation](https://motion.dev/docs)
+- [Examples](https://examples.motion.dev)
+- [Motion UI](https://motion.dev/ui)
+- [MotionScore](https://motion.dev/docs/motionscore)

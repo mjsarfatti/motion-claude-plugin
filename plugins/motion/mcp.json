@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "motion": {
+      "url": "https://mcp.motion.dev",
+      "headers": {
+        "Authorization": "Bearer ${env:MOTION_TOKEN}"
+      }
+    }
+  }
+}
