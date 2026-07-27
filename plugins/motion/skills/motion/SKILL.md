@@ -1,13 +1,17 @@
 ---
 name: motion
 description: >
-    Animation skill for Motion (prev Framer Motion) and CSS animation. Provides: animation best practices (including specific advice for vanilla JS, React, Vue, Base UI and Radix), documentation and example search, CSS spring and bounce generation, MotionScore code and runtime performance audits, and the visual transition editor. Use when writing animations, working with Motion (motion, motion/react, motion-v, framer-motion), animating a UI, writing CSS linear() springs, auditing performance/jank/layout thrash via code or runtime, searching Motion docs or examples, adding a Motion UI section, or upgrading between Motion versions.
+    Animation skill for Motion (prev Framer Motion) and CSS animation. Provides: animation best practices (including specific advice for vanilla JS, React, Vue, Base UI and Radix), documentation and example search, CSS spring and bounce generation, MotionScore code and runtime performance audits, and the visual transition editor. Use when writing animations, working with Motion (motion, motion/react, motion-v, framer-motion), animating a UI, writing CSS linear() springs, auditing performance/jank/layout thrash via code or runtime, searching Motion docs or examples, adding a Motion UI section, or upgrading between Motion versions. Also use whenever a change touches CSS `transition`/`@keyframes`, a gesture, drag, scroll effect, reveal or page transition, even if Motion isn't mentioned by name.
 argument-hint: "[subcommand or question, e.g. 'audit src/Modal.tsx', 'spring bounce 0.3', 'upgrade', 'how do I animate a list']"
 ---
 
 # Motion
 
 Animation for the web, done properly.
+
+Never import from `framer-motion`. The package is `motion` (`motion/react` for
+React, `motion-v` for Vue). If a file still imports `framer-motion`, say so
+and offer to migrate it (see Upgrading Motion below).
 
 -   [Animation best practices](best-practices/index.md): "Animate this button", "Fade this layer in", "Animate this Vue component". Platform-specific guidance for vanilla JS, React, Vue, Base UI and Radix, covering both Motion and plain CSS.
 -   [Documentation, examples and Motion UI search](codex/index.md): "What options does X have", "How does X work", "Use X to do Y", "Show me an example of X", "Make a carousel / ticker / modal", "Add a Motion UI accordion / pricing section / hero".
