@@ -2,67 +2,53 @@
   <img src="assets/cursor-plugin-card.png" alt="Motion for Cursor" width="100%">
 </p>
 
-# Motion
+# Motion AI Kit for Cursor
 
-Animation for the web, done properly.
+Motion AI Kit for Cursor is a suite of animation tools to help agents write production-grade animations.
 
-Cursor reaches for `framer-motion` two package names ago, animates `width` when
-it means `scale`, and picks spring numbers that feel like nothing in
-particular. This plugin fixes that.
+## Features
 
-## What you get
+**Animation best practices:** Hand-written advice by the creator of Motion for taste and technical best practices.
 
-- **Animations that don't jank.** Cursor learns which properties the browser
-  can animate on the compositor and which force a layout every frame.
-- **The real API, not a guess.** Every Motion doc, example and UI section is
-  searchable from inside the editor, so it builds from the official pattern
-  instead of improvising.
-- **A performance audit.** Grade any file, folder or URL S to F by what the
-  animation actually costs, with the line, the reason and the fix.
-- **CSS springs and bounces** as `linear()` curves, ready to paste.
-- **Upgrade help** between Motion versions, and away from `framer-motion` or
-  GSAP.
+**The best Motion context:** The full and latest Motion documentation is made available for your agent to search. [Motion+](https://motion.dev/plus) members gain additional access to search the source code of 450+ Motion Examples and Motion UI components.
 
-Type `/motion` to invoke it, or just animate something.
+**CSS spring generation:** Use Motion to generate spring animations for CSS via the `linear()` easing.
 
-## What's in here
+**MotionScore performance audits:** Run static code and runtime analysis on a specific animation, component or page, graded by S to F, and fix with customised recommendations.
 
-| Path | What it is |
-| --- | --- |
-| `rules/motion.mdc` | Fires the skill on animation work in JS, TS, Vue, Svelte, Astro and CSS files, and catches `framer-motion` imports. |
-| `skills/motion/` | The skill: best practices, codex search, CSS easing, the MotionScore audit, transition preview. |
-| `agents/motion-reviewer.md` | The audit subagent, used for scans bigger than a single file. |
-| `mcp.json` | The Motion MCP server at `mcp.motion.dev`. |
+```
+> /motion src/components for animation performance
+```
 
-## The MCP server
+```
+Rank: B     S ████████████████░░░░░░░  9 · 45%
+            A █████████░░░░░░░░░░░░░░  5 · 25%
+            C ██████░░░░░░░░░░░░░░░░░  4 · 20%
+            D ██░░░░░░░░░░░░░░░░░░░░░  2 · 10%
 
-Remote, so there is nothing to install and nothing to keep updated. New
-examples and docs are available the day they ship.
+src/Sheet.tsx:34 — Tier D
+What:     `height` transition on `.sheet-panel`
+Why:      height triggers layout, then paint, then composite, every frame
+Upgrade:  Motion's `layout` prop (B) or a `scaleY` transform (S)
+```
 
-Four tools at any tier, five with Motion+:
+## Install
 
-- `search-motion-codex(platform, searchTerm)`: documentation, examples and
-  Motion UI. Returns links; content is fetched only when it is read, so a large
-  corpus costs nothing until it is used.
-- `generate-css-easing(kind, duration, bounce)`: springs and bounces as CSS
-  `linear()` curves.
-- `motion-connect`: links the editor to a Motion account. Only appears while
-  you are signed out.
-- `save-transition(name, transition)`: needs an account.
-- `open-transition-editor(...)`: the visual editor, Motion+ only. Falls back
-  to a text response in editors that can't render it.
+Find **Motion** in the Cursor Marketplace and install it. That's it. Write `/motion` and ask to run audits, search docs and source code, and generate springs.
 
-## Why the audit runs in a subagent
+## Motion+
 
-Finding every animation in a project means grepping and reading a lot of
-source. On one file that is cheap and belongs inline. Across a directory it is
-most of a context window, and separate folders don't need to see each other to
-be graded. Its voice rules (assign a tier, name the line, no false positives)
-also work better as a system prompt than as a section competing for attention
-inside a longer skill.
+**[Motion+](https://motion.dev/plus)** adds the ability to search early access and Motion+ API documentation, plus source code for 450+ Motion Examples and Motion UI components. Plus, an experimental visual editor for tuning transitions against a live preview and then applying via your agent.
+
+Ask Cursor to sign you in and it hands you a link. Nothing gets pasted into
+chat.
 
 ## Links
 
-- [motion.dev](https://motion.dev)
+- [Motion](https://motion.dev)
+- [Documentation](https://motion.dev/docs)
+- [Examples](https://examples.motion.dev)
+- [Motion UI](https://motion.dev/ui)
 - [MotionScore](https://motion.dev/docs/motionscore)
-- [Motion+](https://motion.dev/plus)
+
+---
