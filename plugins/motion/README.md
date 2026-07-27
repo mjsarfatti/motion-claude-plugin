@@ -2,9 +2,9 @@
   <img src="assets/cursor-plugin-card.png" alt="Motion for Cursor" width="100%">
 </p>
 
-# Motion AI Kit for Cursor
+# Motion AI Kit for ~~Cursor~~ Claude Code
 
-Motion AI Kit for Cursor is a suite of animation tools to help agents write production-grade animations.
+Motion AI Kit for ~~Cursor~~ Claude Code is a suite of animation tools to help agents write production-grade animations.
 
 ## Features
 
@@ -34,13 +34,20 @@ Upgrade:  Motion's `layout` prop (B) or a `scaleY` transform (S)
 
 ## Install
 
-Find **Motion** in the Cursor Marketplace and install it. That's it. Write `/motion` and ask to run audits, search docs and source code, and generate springs.
+~~Find **Motion** in the Cursor Marketplace and install it.~~
+
+```
+/plugin marketplace add mjsarfatti/motion-claude-plugin
+/plugin install motion@motion
+```
+
+That's it. Write `/motion` and ask to run audits, search docs and source code, and generate springs.
 
 ## Motion+
 
 **[Motion+](https://motion.dev/plus)** adds the ability to search early access and Motion+ API documentation, plus source code for 450+ Motion Examples and Motion UI components. Plus, an experimental visual editor for tuning transitions against a live preview and then applying via your agent.
 
-Ask Cursor to sign you in and it hands you a link. Nothing gets pasted into
+Ask ~~Cursor~~ Claude to sign you in and it hands you a link. Nothing gets pasted into
 chat.
 
 ## Links

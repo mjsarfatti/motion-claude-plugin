@@ -188,17 +188,6 @@ async function validateFrontmatterFile(filePath, componentName, requiredKeys, pl
 }
 
 async function validateComponentFrontmatter(pluginDir, pluginName) {
-  const rulesDir = path.join(pluginDir, "rules");
-  if (await pathExists(rulesDir)) {
-    const files = await walkFiles(rulesDir);
-    for (const file of files) {
-      const ext = path.extname(file).toLowerCase();
-      if (ext === ".md" || ext === ".mdc" || ext === ".markdown") {
-        await validateFrontmatterFile(file, "rule", ["description"], pluginName);
-      }
-    }
-  }
-
   const skillsDir = path.join(pluginDir, "skills");
   if (await pathExists(skillsDir)) {
     const files = await walkFiles(skillsDir);
@@ -248,7 +237,7 @@ function resolveMarketplaceSource(source, pluginRoot) {
 }
 
 async function main() {
-  const marketplacePath = path.join(repoRoot, ".cursor-plugin", "marketplace.json");
+  const marketplacePath = path.join(repoRoot, ".claude-plugin", "marketplace.json");
   const marketplace = await readJsonFile(marketplacePath, "Marketplace manifest");
   if (!marketplace) {
     summarizeAndExit();
@@ -316,7 +305,7 @@ async function main() {
       continue;
     }
 
-    const manifestPath = path.join(pluginDir, ".cursor-plugin", "plugin.json");
+    const manifestPath = path.join(pluginDir, ".claude-plugin", "plugin.json");
     const pluginManifest = await readJsonFile(manifestPath, `${entry.name} plugin manifest`);
     if (!pluginManifest) {
       continue;
@@ -334,7 +323,7 @@ async function main() {
       );
     }
 
-    const manifestFields = ["logo", "rules", "skills", "agents", "commands", "hooks", "mcpServers"];
+    const manifestFields = ["logo", "skills", "agents", "commands", "hooks", "mcpServers", "lspServers"];
     for (const field of manifestFields) {
       const values = extractPathValues(pluginManifest[field]);
       for (const value of values) {
@@ -349,9 +338,9 @@ async function main() {
       addWarning(`${entry.name}: no hooks/hooks.json file found (only needed when using hooks).`);
     }
 
-    const mcpPath = path.join(pluginDir, "mcp.json");
+    const mcpPath = path.join(pluginDir, ".mcp.json");
     if (!(await pathExists(mcpPath))) {
-      addWarning(`${entry.name}: no mcp.json file found (only needed when using MCP servers).`);
+      addWarning(`${entry.name}: no .mcp.json file found (only needed when using MCP servers).`);
     }
   }
 
