@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="plugins/motion/assets/cursor-plugin-card.png" alt="Motion for Cursor" width="100%">
+  <img src="plugins/motion/assets/claude-plugin-card.png" alt="Motion for Cursor" width="100%">
 </p>
 
 # Motion AI Kit for ~~Cursor~~ Claude Code
