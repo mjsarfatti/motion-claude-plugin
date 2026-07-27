@@ -55,4 +55,4 @@ say so when you reach them:
 `best-practices/` and `performance-audit/` are self-contained and work with no
 server at all — use them directly. Only search, easing generation and the
 transition editor need the server. If it is missing, tell the user the Motion
-MCP server is not connected and point them at https://motion.dev/docs/mcp.
+MCP server is not connected and point them at https://motion.dev/docs/ai-kit.
